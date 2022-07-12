@@ -10,7 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       gifs: [],
-      selectedGifId: "ICOgUNjpvO0PC"
+      selectedGifId: null
     }
   }
 
@@ -27,21 +27,24 @@ class App extends React.Component {
     });
   }
 
+  handleClickOnGif = (id) => {
+    this.setState({selectedGifId: id});
+  }
+
   render() {
     return(
       <div>
         <div className="left-scene">
           <SearchBar searchFunction={this.search}/>
           <div className="selected-gif">
-            <Gif id={this.state.selectedGifId}/>
+            <Gif id={this.state.selectedGifId} />
           </div>
         </div>
         <div className="right-scene">
-          <GifList gifs={this.state.gifs}/>
+          <GifList gifs={this.state.gifs} selectGif={this.handleClickOnGif}/>
         </div>
       </div>
       );
   }
 }
-
 export default App;
